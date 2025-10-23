@@ -7,7 +7,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { ScrollToTop } from './cmps/ScrollToTop.jsx'
 import { Hosting } from './pages/Hosting.jsx'
 import { HomeEdit } from './pages/HomeEdit.jsx'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { HomeEditFooter } from './cmps/home-edit/HomeEditFooter.jsx'
 import { Wishlist } from './cmps/Wishlist.jsx'
 import MyTravels from './cmps/MyTravels.jsx'
@@ -32,6 +32,19 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
   const { getNumberOfNights } = draftOrderService
   const home = useSelector((state) => state.homeModule.home)
   const draftOrder = useSelector((state) => state.draftOrderModule.draftOrder)
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
+    
+    useEffect(() => {
+        function handleResize() {
+          const width = window.innerWidth
+          setIsWideScreen(width > 1300)
+        }
+    
+        handleResize()
+    
+        window.addEventListener('resize', handleResize, { passive: true })
+        return () => window.removeEventListener('resize', handleResize)
+      }, [])
 
   useEffect(() => {
     initUser()
@@ -39,7 +52,7 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
   return (
     <>
       <ScrollToTop />
-      <div className={isHomeDetails ? 'narrow-layout' : 'wide-layout'}>
+      <div className={isHomeDetails && isWideScreen ? 'narrow-layout' : 'wide-layout'}>
         <UserMsg />
         <main ref={mainRef}>
           <Routes>

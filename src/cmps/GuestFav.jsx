@@ -1,12 +1,28 @@
 import { FaStar } from 'react-icons/fa'
 import { getAvgRating } from '../services/util.service'
+import { useEffect, useState } from 'react'
+
 export function GuestFav({ home }) {
   const rating = getAvgRating(home) || 0
   const reviewsCount = home?.reviews?.length || 0
   const fullStars = Math.floor(rating)
   const hasHalfStar = rating - fullStars >= 0.25 && rating - fullStars < 0.75
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
-
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
+  
+  useEffect(() => {
+      function handleResize() {
+        const width = window.innerWidth
+        setIsWideScreen(width > 1300)
+      }
+  
+      // Set initial state
+      handleResize()
+  
+      window.addEventListener('resize', handleResize, { passive: true })
+      return () => window.removeEventListener('resize', handleResize)
+    }, [])
+  
   return (
     <div className='guest-fav-container'>
       <div className='guest-fav-badge-row'>
@@ -25,9 +41,12 @@ export function GuestFav({ home }) {
             alt='right wing'
           />
         </div>
-        <div className='guest-fav-text'>
-          One of the most loved homes on Flexbnb, according to guests
-        </div>
+        {isWideScreen ? 
+          <div className='guest-fav-text'>
+            One of the most loved homes on Flexbnb, according to guests
+          </div> :
+          <div className='guest-fav-divider' />
+        }
         <div className='guest-fav-rating-block'>
           <span className='guest-fav-rating'>{rating.toFixed(2)}</span>
           <div className='guest-fav-stars'>

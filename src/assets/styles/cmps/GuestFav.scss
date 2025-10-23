@@ -4,7 +4,7 @@
   padding: 22px 26px;  
   background: #fff;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   max-width: 800px;
   align-self: start !important;
@@ -14,7 +14,8 @@
 .guest-fav-badge-row {
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: space-around;
+  // gap: 24px;
   width: 100%;
 }
 
@@ -31,9 +32,9 @@
   flex-direction: column;
   align-items: center;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: #222;
-  line-height: 1;
+  line-height: 1.125rem;
 }
 
 .guest-fav-text {
@@ -50,7 +51,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 60px;
+  // min-width: 60px;
   font-size: 1.375rem;
   line-height: 1.625rem;
   font-weight: 500;
@@ -64,7 +65,7 @@
 }
 .guest-fav-stars {
   display: flex;
-  gap: 2px;
+  gap: 0.125rem;
   color: #222;
   letter-spacing: -0.22px;
   line-height: 1.625rem;
@@ -88,7 +89,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 60px;
+  // min-width: 60px;
 }
 .guest-fav-reviews-count {
   font-size: 1.375rem;
@@ -106,4 +107,42 @@
   color: #222;
   opacity: 0.8;
   margin-top: 2px;
+}
+
+@media (max-width: 1280px) {
+  .guest-fav-wings-text {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.guest-fav-text {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+
+.guest-fav-rating {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+.guest-fav-stars {
+  
+  svg {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.guest-fav-reviews-block {
+  min-width: 60px;
+}
+.guest-fav-reviews-count {
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: #222;
+  margin-block-end: 0px;
+  line-height: 1.625rem;
+  letter-spacing: -0.01375rem;
+
+}
 }

@@ -36,6 +36,19 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   const [forceExpand, setForceExpand] = useState(false)
 
   const isMobile = useIsMobile()
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
+      
+  useEffect(() => {
+      function handleResize() {
+        const width = window.innerWidth
+        setIsWideScreen(width > 1300)
+      }
+  
+      handleResize()
+  
+      window.addEventListener('resize', handleResize, { passive: true })
+      return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
   useEffect(() => {
     function handleScroll() {
@@ -86,7 +99,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
         shouldCollapse && !forceExpand ? 'scrolled' : ''
       } ${isHosting || isHDImgScrolled ? 'one-row-divider' : ''}
       ${forceExpand ? 'expanded' : ''}
-      ${isHomeDetails ? 'narrow-layout' : 'wide-layout'}
+      ${isHomeDetails && isWideScreen ? 'narrow-layout' : 'wide-layout'}
       ${
         (isBookingDashboard || isWishLists) && isMobile
           ? 'searchbar-wrapper-mobile'
@@ -103,7 +116,8 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
           <nav
             className={`app-header-main-nav ${
               shouldCollapse ? 'scrolled' : 'expanded'
-            }`}
+            }
+            ${isHomeDetails && isWideScreen ? 'narrow-layout' : 'wide-layout'}`}
           >
             {/* hosting, excluding edit, routes: */}
             {isHosting ? (
