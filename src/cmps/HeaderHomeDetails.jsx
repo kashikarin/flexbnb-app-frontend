@@ -6,7 +6,7 @@ import { openOrderConfirmationModal } from '../store/actions/draft-order.actions
 export function HeaderHomeDetails() {
     const home = useSelector(state => state.homeModule.home)
     const isHDStickyCardScrolled = useSelector(state => state.scrollModule.isHDStickyCardScrolled)
-
+    
     return(
         <header className="home-details-scrolled-header">
             <div className="header-home-details-wrapper">

@@ -526,40 +526,40 @@
   }
 }
 
-@media (max-width: 600px) {
-  .home-details-reservation-modal-section {
-    padding: 1rem; // לצמצם מעט את הריווח הכללי
+// @media (max-width: 600px) {
+//   .home-details-reservation-modal-section {
+//     padding: 1rem; // לצמצם מעט את הריווח הכללי
 
-    .reservation-selection {
-      grid-template-columns: 1fr 1fr;
-      font-size: 0.85rem; // הקטנת גודל הכתב הכולל
+//     .reservation-selection {
+//       grid-template-columns: 1fr 1fr;
+//       font-size: 0.85rem; // הקטנת גודל הכתב הכולל
 
-      .reservation-selection-date-checkin,
-      .reservation-selection-date-checkout {
-        padding: 18px 6px 8px; // פחות padding כדי לא לדחוף טקסט החוצה
-        font-size: 0.8rem; // מקטין את הטקסט שבתוך האינפוט
-        div:nth-child(1) {
-          font-size: 0.55rem; // התווית העליונה ("Check-in")
-        }
-        div:nth-child(2) {
-          font-size: 0.85rem; // תאריך או טקסט ראשי
-          line-height: 1.1;
-          word-break: break-word; // מונע גלישה אופקית
-        }
-      }
+//       .reservation-selection-date-checkin,
+//       .reservation-selection-date-checkout {
+//         padding: 18px 6px 8px; // פחות padding כדי לא לדחוף טקסט החוצה
+//         font-size: 0.8rem; // מקטין את הטקסט שבתוך האינפוט
+//         div:nth-child(1) {
+//           font-size: 0.55rem; // התווית העליונה ("Check-in")
+//         }
+//         div:nth-child(2) {
+//           font-size: 0.85rem; // תאריך או טקסט ראשי
+//           line-height: 1.1;
+//           word-break: break-word; // מונע גלישה אופקית
+//         }
+//       }
 
-      .reservation-selection-guest-container {
-        padding: 8px;
-        .reservation-selection-guests-input {
-          font-size: 0.85rem;
-        }
-      }
-    }
+//       .reservation-selection-guest-container {
+//         padding: 8px;
+//         .reservation-selection-guests-input {
+//           font-size: 0.85rem;
+//         }
+//       }
+//     }
 
-    // אם גם הכפתור התחתון צפוף
-    & > button {
-      padding: 10px;
-      font-size: 0.9rem;
-    }
-  }
-}
+//     // אם גם הכפתור התחתון צפוף
+//     & > button {
+//       padding: 10px;
+//       font-size: 0.9rem;
+//     }
+//   }
+// }
