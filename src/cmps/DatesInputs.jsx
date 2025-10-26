@@ -15,7 +15,7 @@ export function DatesInputs({ checkIn, checkOut, withWrapper = false, openedDrop
                     <div className="rmTitle">CHECK-IN</div>
                     <input
                         className="placeholder-content"
-                        type="search"
+                        type="text"
                         placeholder="Add Dates"
                         value={formatDate(checkIn)}
                         readOnly
@@ -33,7 +33,7 @@ export function DatesInputs({ checkIn, checkOut, withWrapper = false, openedDrop
                     <div className="rmTitle">CHECK-OUT</div>
                     <input
                         className="rm-placeholder-content"
-                        type="search"
+                        type="text"
                         placeholder="Add Dates"
                         value={formatDate(checkOut)}
                         readOnly
