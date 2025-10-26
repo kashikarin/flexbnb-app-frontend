@@ -34,10 +34,15 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   const isWishLists = location.pathname === '/wishlists'
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
   const [forceExpand, setForceExpand] = useState(false)
-
   const isMobile = useIsMobile()
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
       
+  useEffect(() => {
+    if (isHomeDetails && isHDImgScrolled) {
+      setHomePageNotScrolled()
+    }
+  }, [isHomeDetails, isHDImgScrolled])
+
   useEffect(() => {
       function handleResize() {
         const width = window.innerWidth
@@ -51,6 +56,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
     }, [])
 
   useEffect(() => {
+    if (!isHomeIndex) return
     function handleScroll() {
       if (window.scrollY > 20) setHomePageScrolled()
       else setHomePageNotScrolled()
@@ -79,12 +85,13 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   }
 
   useEffect(() => {
+    if (!isHomeIndex || isHomeDetails) return
     if (!isHomeIndex) {
       setHomePageScrolled()
     } else {
       setHomePageNotScrolled()
     }
-  }, [isHomeIndex])
+  }, [isHomeIndex, isHomeDetails])
 
   function onCreateNewListing() {
     if (!loggedInUser) return console.warn('No logged in user yet!')

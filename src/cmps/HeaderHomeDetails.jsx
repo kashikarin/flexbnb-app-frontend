@@ -2,13 +2,28 @@ import { FaStar } from 'react-icons/fa'
 import { useSelector } from "react-redux";
 import { getAvgRating, roundToDecimals } from "../services/util.service";
 import { openOrderConfirmationModal } from '../store/actions/draft-order.actions';
+import { useEffect, useState } from 'react';
 
 export function HeaderHomeDetails() {
     const home = useSelector(state => state.homeModule.home)
     const isHDStickyCardScrolled = useSelector(state => state.scrollModule.isHDStickyCardScrolled)
-    
+    const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
+          
+      useEffect(() => {
+          function handleResize() {
+            const width = window.innerWidth
+            setIsWideScreen(width > 1300)
+          }
+      
+          handleResize()
+      
+          window.addEventListener('resize', handleResize, { passive: true })
+          return () => window.removeEventListener('resize', handleResize)
+        }, [])
+
     return(
-        <header className="home-details-scrolled-header">
+        <header className={`home-details-scrolled-header 
+                            ${isWideScreen ? 'narrow-layout' : 'wide-layout'}`}>
             <div className="header-home-details-wrapper">
                 <nav>
                     <div>Photos</div>

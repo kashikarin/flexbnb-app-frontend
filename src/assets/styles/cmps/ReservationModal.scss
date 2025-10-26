@@ -43,49 +43,48 @@
       min-width: 0;
     }
     .reservation-selection-date-checkin,
-.reservation-selection-date-checkout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  padding-block: clamp(8px, 1vw, 10px);
-  padding-inline: clamp(10px, 1vw, 12px);
-  padding-block: clamp(8px, 1vw, 8px);
-  padding-inline-end: 0;
-  font-size: clamp(0.85rem, 1vw, 1rem);
-  border: none;
-  position: relative;
+    .reservation-selection-date-checkout {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; 
+      padding-block: clamp(8px, 1vw, 10px);
+      padding-inline: clamp(10px, 1vw, 12px);
+      padding-block: clamp(8px, 1vw, 8px);
+      padding-inline-end: 0;
+      font-size: clamp(0.85rem, 1vw, 1rem);
+      border: none;
+      position: relative;
   
-  // gap: 1px;
 
-  &.active {
-    box-shadow: inset 0 0 0 2px $primary-black-inverted;
-    border-radius: inherit;
-  }
+      &.active {
+        box-shadow: inset 0 0 0 2px $primary-black-inverted;
+        border-radius: inherit;
+      }
 
-  .rmTitle {
-    font-size: 0.625rem;
-    font-weight: 700;
-    color: $primary-font-black;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-    line-height: 0.75rem;
-    text-overflow: ellipsis;
+      .rmTitle {
+        font-size: 0.625rem;
+        font-weight: 700;
+        color: $primary-font-black;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+        line-height: 0.75rem;
+        text-overflow: ellipsis;
 
-  }
+      }
 
-  input {
-    border: none;
-    background: transparent;
-    // margin-inline-end: -2px; 
-    
-    font-size: clamp(0.9rem, 1vw, 1rem);
-    color: $primary-font-black;
-    line-height: 1.25rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
+      input {
+        border: none;
+        background: transparent;
+        // margin-inline-end: -2px; 
+        
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        color: $primary-font-black;
+        line-height: 1.25rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
 
 .reservation-selection-date-checkin {
   border-inline-end: 1px solid gray;

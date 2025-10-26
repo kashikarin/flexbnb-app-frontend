@@ -39,9 +39,15 @@
     grid-template-rows: auto;
   }
 
-  &.one-row-divider {
+  &.one-row-divider,
+  .app-header.one-row-divider.scrolled
+   {
+    transition: none;
     grid-template-rows: auto;
     border-bottom: 1px solid $divider-color;
+    min-height: 80px; 
+    max-height: 80px;
+    overflow: hidden;
   }
 
   & > .app-header-main-nav {

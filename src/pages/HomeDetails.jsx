@@ -21,6 +21,7 @@ import {
   setHomeDetailsImgScrolled,
   setHomeDetailsStickyCardNotScrolled,
   setHomeDetailsStickyCardScrolled,
+  setHomePageNotScrolled,
 } from '../store/actions/scroll.actions'
 import {
   addDraftOrder,
@@ -38,6 +39,7 @@ export function HomeDetails() {
   const isOrderConfirmationModalOpen = useSelector(
     (state) => state.draftOrderModule.isOrderConfirmationModalOpen
   )
+  const isHDImgScrolled = useSelector(state => state.scrollModule.isHDImgScrolled)
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
   const [isLiked, setIsLiked] = useState(
     () => loggedInUser?.likedHomes?.includes(homeId) ?? false
@@ -45,6 +47,16 @@ export function HomeDetails() {
   const draftOrder = useSelector((state) => state.draftOrderModule.draftOrder)
   const imgBreakPointRef = useRef()
   const [ showLoader ] = useState(true)
+
+  useEffect(() => {
+    setHomePageNotScrolled()
+  }, [])
+
+  useEffect(() => {
+  if (isHDImgScrolled) {
+    setHomePageNotScrolled()
+  }
+}, [isHDImgScrolled])
 
   useEffect(() => {
     if (!homeId) return
@@ -65,6 +77,7 @@ export function HomeDetails() {
       const elAfterImg = imgBreakPointRef.current
       const stickySentinel = document.querySelector('#sticky-sentinel')
       const header = document.querySelector('.home-details-header')
+      console.log('📸 observing', elAfterImg)
 
       if (!header || !elAfterImg || !stickySentinel) return
 
@@ -139,8 +152,7 @@ export function HomeDetails() {
           </div>
           <div
             className={`home-details-img-container hd-img-layout-${home.imageUrls?.length}`}
-            id="hd-images-container"
-            ref={imgBreakPointRef}
+            id="hd-images-container"     
           >
             {home.imageUrls?.slice(0, 5).map((imageUrl, idx) => (
               <img
@@ -151,6 +163,7 @@ export function HomeDetails() {
               />
             ))}
           </div>
+          <div ref={imgBreakPointRef} style={{ position: 'relative', height: '1px' }}></div>
           <section className="home-details-mid-section">
             <div className="home-details-mid-left-part-wrapper">
               <div

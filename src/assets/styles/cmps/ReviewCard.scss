@@ -75,6 +75,107 @@
       line-height: 1.5;
       margin-top: 8px;
       font-weight: 300;
+      display: -webkit-box;               
+      -webkit-box-orient: vertical;       
+      -webkit-line-clamp: 3;              
+      overflow: hidden;                   
+      text-overflow: ellipsis;            
+      line-height: 1.4;
+      max-height: calc(1.4em * 3); 
+      &.expanded {
+        -webkit-line-clamp: unset;
+        overflow: visible;
+      }
+    }
+
+    .show-more-btn {
+      background: none;
+      border: none;
+      color: #222;
+      font-weight: 500;
+      text-decoration: underline;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: 4px;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+@media (max-width: $normal-breakpoint) {
+  .review-card-list {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 32px;
+    align-items: center;
+    border-top: 1px solid #e0e0e0;
+    padding-block-start: 22px;
+    padding-block-end: 22px;
+  }
+}
+
+@media (max-width: $normal-breakpoint) {
+  .review-card-list {
+    display: grid;
+    grid-template-columns: auto;
+
+    .review-txt {
+      line-height: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: $normal-breakpoint) {
+  .review-card-list {
+    display: grid;
+    grid-template-columns: auto;
+
+  }
+}
+
+@media (max-width: $narrow-breakpoint) {
+  .review-card-list {
+    display: flex; 
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; 
+    gap: 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    .review-card-list::-webkit-scrollbar {
+      display: none; 
+    }
+
+    .review-card {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-areas:
+        "meta"
+        "text"
+        "user"
+        "footer";
+      gap: 0.75rem;
+
+      .review-user {
+        grid-area: user;
+      }
+
+      .review-meta {
+        grid-area: meta;
+      }
+
+      .review-txt {
+        grid-area: text;
+
+      }
     }
   }
 }

@@ -526,6 +526,15 @@
   }
 }
 
+// @media (max-width: $narrow-breakpoint) {
+//   .home-details-container {
+//     column-gap: 2rem;
+//     display: grid;
+//     grid-template-columns: 1fr minmax(280px, 350px);
+
+//   }
+// }
+
 // @media (max-width: 600px) {
 //   .home-details-reservation-modal-section {
 //     padding: 1rem; // לצמצם מעט את הריווח הכללי

@@ -29,7 +29,14 @@ export function CapacityDropdown({
   return isOpen && numbersReady ? (
     <div>
       <div className="capacity-dropdown-container">
-        <div className="capacity-dropdown-panel">
+        <div 
+          className="capacity-dropdown-panel" 
+          style={father === 'reservation-modal' ? 
+              {left: 'unset', 
+              right: '0', 
+              borderRadius: '4px', 
+              marginTop: '0px', 
+              boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px'} : {}}>
           <div className="capacity-drowdown-categories-wrapper">
             <div className="capacity-drowdown-category-row adults">
               <div className="category-row-description">

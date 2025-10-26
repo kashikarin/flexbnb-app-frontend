@@ -68,10 +68,12 @@ export function ReservationModal({
       }
 
       if (openedDropdown === 'capacity') {
-        if (
-          rmCapacityDropdownRef.current &&
-          !rmCapacityDropdownRef.current.contains(event.target)
-        ) {
+        const clickedInsideDropdown =
+        rmCapacityDropdownRef.current?.contains(event.target)
+        const clickedTrigger = rmSelectionRef.current
+        ?.querySelector('.reservation-selection-guest-container')
+        ?.contains(event.target)
+        if (!clickedInsideDropdown && !clickedTrigger) {
           onCloseDropdown()
         }
       }
