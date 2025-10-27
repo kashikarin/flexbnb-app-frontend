@@ -46,7 +46,7 @@
 @import 'cmps/FilterDropdown';
 @import 'cmps/icons';
 @import 'cmps/BuyingModals';
-@import 'cmps/HeaderHomeDetails';
+@import 'cmps/HeaderHomeDetailsScrolled';
 @import 'cmps/ReviewCard';
 @import 'cmps/home-edit/HeaderHomeEdit';
 @import 'cmps/home-edit/HomeEditStepOneTitle';
@@ -71,3 +71,7 @@
 @import 'cmps/CloudinaryDragUpload.scss';
 @import 'cmps/CapacityDropdown.scss';
 @import 'cmps/SearchBar_mobile.scss';
+@import 'cmps/HomeDetailsMobileFooter.scss';
+@import 'cmps/HomeDetailsMobileHeader.scss';
+@import 'cmps/LikeButton.scss';
+

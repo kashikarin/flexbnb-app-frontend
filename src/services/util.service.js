@@ -10,6 +10,7 @@ export const utilService = {
   getAvgRating,
   roundToDecimals,
   getCityFromCoordinates,
+  formatRange
 }
 
 export function makeId(length = 6) {
@@ -149,7 +150,7 @@ export function getNextAvailableStayStr(home, nights = 3) {
       b => candidate < b.checkOut && candidateEnd > b.checkIn
     )
 
-    if (!overlap) return _formatRange(candidate, candidateEnd)
+    if (!overlap) return formatRange(candidate, candidateEnd)
        
     const blocking = home.bookings.find(
       b => candidate < b.checkOut && candidateEnd > b.checkIn
@@ -158,7 +159,7 @@ export function getNextAvailableStayStr(home, nights = 3) {
   }
 }
 
-function _formatRange(start, end) {
+export function formatRange(start, end) {
   const opts = { month: 'short', day: 'numeric' }
   const startStr = start.toLocaleDateString('en-US', opts)
   const endStr = end.toLocaleDateString('en-US', opts)

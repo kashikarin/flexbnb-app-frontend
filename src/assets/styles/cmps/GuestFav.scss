@@ -146,3 +146,71 @@
 
 }
 }
+
+
+
+@media (max-width: $narrow-breakpoint) {
+  .guest-fav-container {
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 16px 0;
+    margin: 0;
+    justify-self: stretch;
+    box-sizing: border-box;
+
+    .guest-fav-badge-row {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+      min-width: 0; /* ✅ מאפשר לילדים להצטמצם */
+      box-sizing: border-box;
+      overflow: hidden; /* ✅ מונע גלישה */
+    }
+
+    .guest-fav-wings {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .guest-fav-text {
+      display: none;
+    }
+
+    .guest-fav-divider {
+      flex: 0 0 1px;
+      height: 36px;
+      background: #e0e0e0;
+      margin: 0 8px;
+    }
+
+    .guest-fav-rating-block,
+    .guest-fav-reviews-block {
+      flex: 0 1 auto; /* ✅ מאפשר להם להתכווץ */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-width: 0; /* ✅ חשוב מאוד כדי למנוע גלישה */
+      box-sizing: border-box;
+    }
+
+    .guest-fav-rating {
+      font-size: 1.125rem;
+      line-height: 1.25rem;
+    }
+
+    .guest-fav-reviews-count {
+      font-size: 1.125r
+    }
+  }
+}

@@ -3,12 +3,17 @@ import { useSelector } from "react-redux";
 import { getAvgRating, roundToDecimals } from "../services/util.service";
 import { openOrderConfirmationModal } from '../store/actions/draft-order.actions';
 import { useEffect, useState } from 'react';
+import { useIsMobile } from '../Providers/MobileProvider';
+import { ReactSVG } from 'react-svg';
+import { LikeButton } from './LikeButton';
+import { HomeDetailsMobileHeader } from './HomeDetailsMobileHeader';
 
-export function HeaderHomeDetails() {
+export function HeaderHomeDetailsScrolled() {
     const home = useSelector(state => state.homeModule.home)
     const isHDStickyCardScrolled = useSelector(state => state.scrollModule.isHDStickyCardScrolled)
     const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
-          
+    const isMobile = useIsMobile()
+    
       useEffect(() => {
           function handleResize() {
             const width = window.innerWidth
@@ -21,8 +26,9 @@ export function HeaderHomeDetails() {
           return () => window.removeEventListener('resize', handleResize)
         }, [])
 
-    return(
-        <header className={`home-details-scrolled-header 
+    if (isMobile) return <HomeDetailsMobileHeader />
+
+    return (<header className={`home-details-scrolled-header 
                             ${isWideScreen ? 'narrow-layout' : 'wide-layout'}`}>
             <div className="header-home-details-wrapper">
                 <nav>

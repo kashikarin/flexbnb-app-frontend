@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useIsMobile } from '../Providers/MobileProvider'
 import {
   loadHome,
   addUserLike,
@@ -31,6 +32,8 @@ import {
 } from '../store/actions/draft-order.actions'
 import { addOrder } from '../store/actions/order.actions'
 import { ReactSVG } from 'react-svg'
+import { DotsIndicator } from '../cmps/DotsIndicator'
+import { LikeButton } from '../cmps/LikeButton'
 
 export function HomeDetails() {
   const { homeId } = useParams()
@@ -41,23 +44,53 @@ export function HomeDetails() {
   )
   const isHDImgScrolled = useSelector(state => state.scrollModule.isHDImgScrolled)
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
-  const [isLiked, setIsLiked] = useState(
-    () => loggedInUser?.likedHomes?.includes(homeId) ?? false
-  )
   const draftOrder = useSelector((state) => state.draftOrderModule.draftOrder)
   const imgBreakPointRef = useRef()
   const [ showLoader ] = useState(true)
+  const isMobile = useIsMobile()
+  const [currentIdx, setCurrentIdx] = useState(0)
+  const [imgWidth, setImgWidth] = useState(0)
+  const imgRef = useRef(null)
+  const containerRef = useRef(null)
+
+  function getImgWidthByScreen(){
+    if (imgRef.current) return imgRef.current.getBoundingClientRect().width
+    if (containerRef.current) return containerRef.current.getBoundingClientRect().width
+    return window.innerWidth
+  }  
 
   useEffect(() => {
-    setHomePageNotScrolled()
-  }, [])
+    function updateImageWidth(){
+      const width = getImgWidthByScreen()
+      setImgWidth(width)
+    }
 
-  useEffect(() => {
-  if (isHDImgScrolled) {
-    setHomePageNotScrolled()
+    updateImageWidth()
+
+    const handleResize = () => updateImageWidth()
+
+    let resizeObserver
+    if (containerRef.current) {
+      resizeObserver = new ResizeObserver(() => updateImageWidth())
+      resizeObserver.observe(containerRef.current)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+  return () => {
+    window.removeEventListener('resize', handleResize)
+    if (resizeObserver) resizeObserver.disconnect()
   }
-}, [isHDImgScrolled])
+}, [])
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const width = getImgWidthByScreen()
+      setImgWidth(width)
+    }, 100)
+    return () => clearTimeout(timeoutId)
+  }, [home?.imageUrls])
+  
   useEffect(() => {
     if (!homeId) return
     loadHome(homeId)
@@ -68,16 +101,10 @@ export function HomeDetails() {
   }, [home, filterBy])
 
   useEffect(() => {
-    setIsLiked(loggedInUser?.likedHomes?.includes(homeId) ?? false)
-  }, [loggedInUser?.likedHomes, homeId])
-
-
-  useEffect(() => {
     try {
       const elAfterImg = imgBreakPointRef.current
       const stickySentinel = document.querySelector('#sticky-sentinel')
       const header = document.querySelector('.home-details-header')
-      console.log('📸 observing', elAfterImg)
 
       if (!header || !elAfterImg || !stickySentinel) return
 
@@ -111,24 +138,11 @@ export function HomeDetails() {
     }
   }, [home])
 
-  async function handleHomeSave(e) {
+
+  function onDotClick(e, index) {
     e.preventDefault()
     e.stopPropagation()
-    if (!home || !loggedInUser) return
-    const nextLiked = !isLiked
-    setIsLiked(nextLiked)
-    try {
-      if (nextLiked) {
-        await addLike(homeId, loggedInUser._id)
-        await addUserLike(homeId, loggedInUser._id)
-      } else {
-        await removeLike(homeId, loggedInUser._id)
-        await removeUserLike(homeId, loggedInUser._id)
-      }
-      await loadHome(homeId)
-    } catch (err) {
-      console.error('Cannot toggle like', err)
-    }
+    setCurrentIdx(index)
   }
 
   return (
@@ -143,27 +157,59 @@ export function HomeDetails() {
             <h1>
               {home.type} in {home.loc.city}, {home.loc.country}
             </h1>
-            <div className="home-details-heart" onClick={handleHomeSave}>
-              <FaHeart
-                className={`home-details-heart-icon ${isLiked ? 'saved' : ''}`}
-              />
-              <span>{isLiked ? 'Saved' : 'Save'}</span>
-            </div>
+            {!isMobile &&<LikeButton homeId={homeId} father={'HomeDetails'} />}
           </div>
-          <div
-            className={`home-details-img-container hd-img-layout-${home.imageUrls?.length}`}
-            id="hd-images-container"     
-          >
-            {home.imageUrls?.slice(0, 5).map((imageUrl, idx) => (
-              <img
-                key={idx}
-                className="home-details-img"
-                src={imageUrl}
-                alt={`home image ${idx + 1}`}
-              />
-            ))}
-          </div>
-          <div ref={imgBreakPointRef} style={{ position: 'relative', height: '1px' }}></div>
+          {isMobile ? (
+            <div className="home-details-img-container-mobile" ref={containerRef}>
+              <div className="home-details-img-slider-wrapper">
+                <div 
+                  className="home-details-img-tracker"
+                  style={{ '--translate-x-images': `${-currentIdx * 100}%`,
+                            '--slides-num': home.imageUrls?.slice(0, 5).length || 1   
+                        }}
+                >
+                  {home.imageUrls?.slice(0, 5).map((imageUrl, idx) => (
+                    <div 
+                      className="hd-img-slider-item" 
+                      key={idx}
+                      ref={idx === 0 ? imgRef : null}
+                    >
+                      <img 
+                        src={imageUrl}
+                        alt={`home image ${idx + 1}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="home-details-dots-indicator-wrapper">
+                <DotsIndicator
+                  slidesNum={home?.imageUrls?.length}
+                  currentIdx={currentIdx}
+                  onDotClick={onDotClick}
+                />
+              </div>
+            </div>) : (
+              <div
+                className={`
+                        home-details-img-container 
+                        hd-img-layout-${home.imageUrls?.length}
+                      `}
+              >
+                    {home.imageUrls?.slice(0, 5).map((imageUrl, idx) => (
+                      <img
+                        key={idx}
+                        className={`home-details-img ${idx === currentIdx ? 'active' : ''}`}
+                        src={imageUrl}
+                        alt={`home image ${idx + 1}`}
+                      />
+                    ))}
+              </div>
+              
+            )}
+          <div style={{ paddingTop: '20px' }}>
+  <div ref={imgBreakPointRef} style={{ height: '1px' }}></div>
+</div>
           <section className="home-details-mid-section">
             <div className="home-details-mid-left-part-wrapper">
               <div
@@ -268,7 +314,7 @@ export function HomeDetails() {
                 </ul>
               </section>
             </div>
-            <div className="home-details-mid-right-part-wrapper">
+            {!isMobile && <div className="home-details-mid-right-part-wrapper">
               <section className="home-details-sticky-sidebars">
                 <aside className="rare-modal">
                   <IoDiamond className="diamond-icon" />
@@ -287,7 +333,7 @@ export function HomeDetails() {
                 )}
               </section>
               <div id="sticky-sentinel" style={{ height: '250px' }} />
-            </div>
+            </div>}
           </section>
           <section className="home-details-reviews-section">
             <ReviewCard reviews={home.reviews} />

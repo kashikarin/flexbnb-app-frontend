@@ -1,6 +1,7 @@
 import { FaStar } from 'react-icons/fa'
 import { getAvgRating } from '../services/util.service'
 import { useEffect, useState } from 'react'
+import { useIsMobile } from '../Providers/MobileProvider'
 
 export function GuestFav({ home }) {
   const rating = getAvgRating(home) || 0
@@ -9,7 +10,7 @@ export function GuestFav({ home }) {
   const hasHalfStar = rating - fullStars >= 0.25 && rating - fullStars < 0.75
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
-  
+  const isMobile = useIsMobile()
   useEffect(() => {
       function handleResize() {
         const width = window.innerWidth

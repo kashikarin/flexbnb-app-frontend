@@ -1,0 +1,40 @@
+.home-details-heart {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      transform: 0.1s cubic-bezier(0.2, 0, 0.1);
+      padding-block-end: 0;
+      padding: 4px;
+
+      .home-details-heart-icon {
+        width: 16px;
+        height: 16px;
+        fill: #fff;
+        stroke: $primary-black-inverted;
+        stroke-width: 14;
+        transition: color 0.2s, fill 0.2s;
+      }
+        span {
+        color: $primary-black-inverted;
+        text-decoration: underline;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 500;
+        
+      }
+
+      .home-details-heart-icon.saved {
+        color: $primary-pink;
+        fill: $primary-pink;
+        stroke: $primary-pink;
+        transform: scale(0.95);
+      }
+
+      &:hover {
+        background-color: #f6f6f6;
+      }
+      }
+    

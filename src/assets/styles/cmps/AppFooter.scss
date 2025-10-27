@@ -41,6 +41,8 @@
 
 
 .app-footer-mobile {
+  display: grid;
+  grid-template-columns: inherit;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -49,10 +51,12 @@
   z-index: 1000;
 
   .bottom-nav {
+    grid-column: 2;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     height: 60px;
+    width: 100%;
   }
 
   .nav-btn {

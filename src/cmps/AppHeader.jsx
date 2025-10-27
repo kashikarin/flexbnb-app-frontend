@@ -6,7 +6,7 @@ import { SearchBar } from './SearchBar'
 import { LabelsSlider } from './LabelsSlider'
 import { userService } from '../services/user/index'
 import { SET_LOGGEDINUSER } from '../store/reducers/user.reducer'
-import { HeaderHomeDetails } from './HeaderHomeDetails'
+import { HeaderHomeDetailsScrolled } from './HeaderHomeDetailsScrolled'
 import { HeaderHomeEdit } from './home-edit/HeaderHomeEdit'
 import { setPotentialHome } from '../store/actions/home-edit.actions'
 import {
@@ -16,6 +16,7 @@ import {
 import { UserMenu } from './UserMenu'
 import { useIsMobile } from '../Providers/MobileProvider'
 import { SearchBar_mobile } from './SearchBar_mobile'
+import { HomeDetailsMobileHeader } from './HomeDetailsMobileHeader'
 
 export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   const dispatch = useDispatch()
@@ -117,7 +118,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
       {isHomeEdit ? (
         <HeaderHomeEdit />
       ) : isHDImgScrolled && isHomeDetails ? (
-        <HeaderHomeDetails />
+        <HeaderHomeDetailsScrolled />
       ) : (
         <>
           <nav
@@ -125,7 +126,9 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
               shouldCollapse ? 'scrolled' : 'expanded'
             }
             ${isHomeDetails && isWideScreen ? 'narrow-layout' : 'wide-layout'}`}
+            style={!(isHomeDetails && isMobile) ? {paddingBlockEnd: '2rem'} : {}}
           >
+            {isHomeDetails && isMobile && <HomeDetailsMobileHeader />}
             {/* hosting, excluding edit, routes: */}
             {isHosting ? (
               !isMobile ? (
@@ -152,11 +155,11 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                   <div className="app-header-right-section">
                     {loggedInUser ? (
                       <>
-                        <Link to={isHosting ? '/' : '/hosting'}>
+                        {isWideScreen && (<Link to={isHosting ? '/' : '/hosting'}>
                           {isHosting
                             ? 'Switch to traveling'
                             : 'Switch to hosting'}
-                        </Link>
+                        </Link>)}
                         <div className="user-info">
                           <Link to={`user/${loggedInUser._id}`}>
                             {loggedInUser.imageUrl ? (
@@ -222,11 +225,11 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                     <div className="app-header-right-section">
                       {loggedInUser ? (
                         <>
-                          <Link to={isHosting ? '/' : '/hosting'}>
+                      {isWideScreen && (<Link to={isHosting ? '/' : '/hosting'}>
                             {isHosting
                               ? 'Switch to traveling'
                               : 'Switch to hosting'}
-                          </Link>
+                          </Link>)}
                           <div className="user-info">
                             <Link to={`user/${loggedInUser._id}`}>
                               {loggedInUser.imageUrl ? (
@@ -260,6 +263,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                     </div>
                   </div>
                 )}
+                {/* home details mobile header */}
                 {isWishLists && isMobile && (
                   <div className="app-header-main-nav-content">
                     {/* non-hosting - left section */}
@@ -296,11 +300,11 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                         />
                       </div>
                     ) : (
-                      <div className="searchbar-wrapper-mobile">
+                      isHomeIndex ? (<div className="searchbar-wrapper-mobile">
                         <SearchBar_mobile
                           setIsSearchExpanded={setIsSearchExpanded}
                         />
-                      </div>
+                      </div>) : <></>
                     )
                   ) : (
                     <div></div>
