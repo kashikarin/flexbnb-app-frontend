@@ -9,7 +9,7 @@
     align-items: center;
     padding-block: 1rem;
     height: 64px;
-    
+
   
     .home-details-header-mobile-wrapper {
         grid-column: 2;
@@ -34,4 +34,16 @@
         } 
 
         }
-}}
+    }
+    .home-details-header-mobile-wrapper.modal {
+        grid-column: 2;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+
+        & > span {
+            color: $primary-font-black;
+        }
+    }
+}
+

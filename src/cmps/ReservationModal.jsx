@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ReactSVG } from 'react-svg'
 import { CapacityDropdown } from './CapacityDropdown'
-import { BuyingStepOneModal } from './BuyingStepOneModal'
+import { BuyingModal } from './BuyingModal'
 import { formatDate, normalizeDate, roundToDecimals } from '../services/util.service'
 import { DatesDropdown } from './DatesDropdown'
 import { draftOrderService } from '../services/draft-order/draft-order.service.local'

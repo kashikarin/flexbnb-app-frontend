@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { roundToDecimals } from '../services/util.service'
 import { removeDraftOrder } from '../store/actions/draft-order.actions'
 
-export function BuyingStepOneModal({
+export function BuyingModal({
   draftOrder,
   homePrice,
   nightsNum,
@@ -57,7 +57,7 @@ export function BuyingStepOneModal({
         </div>
 }
   return (
-    <div className='buying-modal-step-one'>
+    <div className='buying-modal'>
       <div>
         <h3>{currentStep === 2 ? 'Booking Confirmed!' : 'One last step'}</h3>
         <p>

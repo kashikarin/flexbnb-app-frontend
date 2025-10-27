@@ -14,7 +14,7 @@ import MyTravels from './cmps/MyTravels.jsx'
 import { BookingDashboard } from './pages/BookingDashboard.jsx'
 import { initUser } from './store/actions/user.actions.js'
 import { BookingPlaceholder } from './cmps/BookingPlaceholder.jsx'
-import { BuyingStepOneModal } from './cmps/BuyingStepOneModal.jsx'
+import { BuyingModal } from './cmps/BuyingModal.jsx'
 import { useSelector } from 'react-redux'
 import { draftOrderService } from './services/draft-order/draft-order.service.local.js'
 import { addOrder } from './store/actions/order.actions.js'
@@ -80,7 +80,7 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
         </main>
 
         {home && draftOrder && isOrderConfirmationModalOpen && (
-          <BuyingStepOneModal
+          <BuyingModal
             draftOrder={draftOrder}
             homePrice={home.price}
             nightsNum={getNumberOfNights(

@@ -51,7 +51,7 @@
       padding-inline: clamp(10px, 1vw, 12px);
       padding-block: clamp(8px, 1vw, 8px);
       padding-inline-end: 0;
-      font-size: clamp(0.85rem, 1vw, 1rem);
+      font-size: clamp(0.85rem, 1vw, 1rem) !important;
       border: none;
       position: relative;
   
@@ -78,7 +78,7 @@
         background: transparent;
         // margin-inline-end: -2px; 
         
-        font-size: clamp(0.9rem, 1vw, 1rem);
+        font-size: clamp(0.85rem, 1vw, 1rem) !important;
         color: $primary-font-black;
         line-height: 1.25rem;
         overflow: hidden;

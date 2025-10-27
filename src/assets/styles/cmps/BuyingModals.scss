@@ -1,4 +1,4 @@
-.buying-modal-step-one {
+.buying-modal {
   position: fixed !important;
   inset: 0 !important;
   background-color: rgba(0, 0, 0, 0.6) !important;
@@ -164,32 +164,191 @@
     }
   }
 
-  @media (max-width: $narrow-breakpoint) {
-    > div {
-      width: 100vh;
-      height: 100vh;
-      max-height: 100vh;
-      border-radius: 0;
-      padding: 1rem;
-      justify-content: space-between;
-    }
+  // @media (max-width: $narrow-breakpoint) {
+  //   > div {
+  //     width: 100vh;
+  //     height: 100vh;
+  //     max-height: 100vh;
+  //     border-radius: 0;
+  //     padding: 1rem;
+  //     justify-content: space-between;
+  //   }
 
-    .reservation-details {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+  //   .reservation-details {
+  //     grid-template-columns: 1fr;
+  //     gap: 1.5rem;
+  //     flex: 1;
+  //     display: flex;
+  //     flex-direction: column;
+  //     overflow-y: auto;
+
+  //   }
+
+  //   .modal-actions {
+  //     flex-direction: column-reverse;
+  //     flex-shrink: 0;
+  //   }
+  // }
+}
+
+@media (max-width: $narrow-breakpoint) {
+  .buying-modal {
+    position: fixed;
+    inset: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    z-index: 99999;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    height: 100dvh;
+
+    & > div {
       flex: 1;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      min-height: 100vh;
+      max-height: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 1.5rem;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      overflow: visible;
 
-      .property-image {
-        order: -1;
+      h3 {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem;
       }
-    }
 
-    .modal-actions {
-      flex-direction: column-reverse;
-      flex-shrink: 0;
-    }
+      p{
+        font-size: 1rem !important;
+        margin-bottom: 1rem;
+      }
+  
+      .reservation-details {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "property"
+          "date-guest"
+          "price";
+        gap: 1.5rem;
+        overflow: visible;
+        border: 1px solid $divider-color;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-block-end: 1rem;
+
+        .reservation-info {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+
+          .reservation-date-guest,
+          .reservation-price-details {
+            h3 {
+              font-size: 1rem !important;
+              margin-bottom: 0.5rem;
+              color: $primary-font-black;
+            }
+
+            p {
+              margin-bottom: 0.75rem;
+              color: $secondary-font-gray;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              font-size: 0.9rem !important;
+
+              & :first-child {
+                font-weight: 600;
+                color: $primary-font-black;
+                font-size: 0.9rem !important;
+              }
+            }
+          }
+
+          .reservation-price-details {
+            .price-amount,
+            .service-fee {
+              p {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+              }
+            }
+
+            .total {
+              border-top: 1px solid $secondary-font-gray;
+              padding-top: 1rem;
+              margin-top: 1rem;
+
+              p {
+                font-weight: 600;
+                font-size: 1.1rem;
+                color: $primary-font-black;
+                display: flex;
+                justify-content: space-between;
+              }
+            }
+          }
+        }
+        .property-details {
+          grid-area: property;
+          flex-direction: row;
+          gap: 1rem;
+
+          img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          }
+
+          .property-info {
+            margin-top: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            h4 {
+              font-size: 1rem;
+              font-weight: 600;
+              color: $primary-font-black;
+              margin-bottom: 0.25rem;
+            }
+
+            p {
+              font-size: 0.9rem;
+              color: $secondary-font-gray;
+            }
+          }
+
+        }
+
+        .reservation-date-guest {
+          grid-area: date-guest;
+        }
+
+        .reservation-price-details {
+          grid-area: price;
+        }
+      }
+      .modal-actions {
+        flex-shrink: 0;
+        flex-direction: column-reverse;
+        margin-top: 0;
+        button {
+          width: 100%;
+        }
+      }
+    }      
   }
 }
