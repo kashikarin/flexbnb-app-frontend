@@ -46,8 +46,11 @@
       position: relative;
       width: 100%;
       max-width: 100vw;
-      overflow: hidden;
+      overflow-x: auto; 
+      overflow-y: hidden;
       margin-block-end: 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
 
       &:hover {
         .images-slider-buttons-container {
@@ -58,6 +61,7 @@
       .home-preview-image-slider-wrapper {
         width: 100%;
         max-width: 100vw;
+        overflow: visible;
         .home-preview-image-slider-track {
           display: flex;
           flex-direction: row;
@@ -67,6 +71,8 @@
           transform: translate3d(var(--translate-x-images, 0), 0, 0);
           width: max-content;
           max-width: 100%;
+          scroll-snap-type: x mandatory;
+          scroll-padding: 0;
 
           .images-slider-item {
             flex: 0 0 auto;
@@ -74,10 +80,12 @@
             aspect-ratio: 1/1;
             overflow: hidden;
             position: relative;
+            scroll-snap-align: start; 
             img {
               width: 100%;
               height: 100%;
               object-fit: cover;
+              scroll-snap-align: start;
               border-radius: 12px;
               display: block;
             }

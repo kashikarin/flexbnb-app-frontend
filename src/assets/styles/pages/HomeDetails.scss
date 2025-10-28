@@ -446,6 +446,7 @@
   grid-column: 1 / -1;
   position: relative;
   width: 100%;
+  overflow-x: auto; 
   overflow-y: hidden;
   margin-block-start: 22px;
   background-color: #fff;
@@ -456,7 +457,7 @@
   .home-details-img-slider-wrapper {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
 
     .home-details-img-tracker {
       display: flex;
