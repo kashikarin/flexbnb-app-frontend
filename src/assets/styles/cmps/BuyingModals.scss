@@ -122,6 +122,11 @@
         p {
           font-size: 0.9rem;
           color: $secondary-font-gray;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -190,6 +195,7 @@
   //   }
   // }
 }
+
 
 @media (max-width: $narrow-breakpoint) {
   .buying-modal {
@@ -303,6 +309,7 @@
           grid-area: property;
           flex-direction: row;
           gap: 1rem;
+          
 
           img {
             width: 150px;
@@ -316,7 +323,7 @@
             margin-top: 0px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: start;
             align-items: start;
             h4 {
               font-size: 1rem;
@@ -326,8 +333,13 @@
             }
 
             p {
-              font-size: 0.9rem;
+              font-size: 0.8rem;
               color: $secondary-font-gray;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
 

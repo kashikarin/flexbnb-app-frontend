@@ -4,10 +4,40 @@ import { AiOutlineMessage } from "react-icons/ai"
 import { MdOutlineTravelExplore } from "react-icons/md"
 import { ReactSVG } from 'react-svg'
 import { HomeDetailsMobileFooter } from "./HomeDetailsMobileFooter"
+import { useSelector } from "react-redux"
+import { useState } from "react"
 
 export function AppFooter_mobile() {
+  const loggedInUser = useSelector(state => state.userModule.loggedInUser)
   const location = useLocation()
   const isHomeDetails = location.pathname.startsWith('/home/')
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [isSignup, setIsSignup] = useState(false)
+
+  function openAuthModal(ev, isSignupMode = false) {
+    ev.preventDefault()
+    setIsSignup(isSignupMode)
+    setIsAuthModalOpen(true)
+    // setError('')
+  }
+
+  async function handleLogout() {
+      try {
+        await logout()
+        dispatch({ type: SET_LOGGEDINUSER, user: null })
+        setIsDropdownOpen(false)
+      } catch (err) {
+        console.error('Logout failed:', err)
+      }
+  }
+  
+    function handleKeyPress(ev) {
+      if (ev.key === 'Enter') {
+        ev.preventDefault()
+        handleAuth()
+      }
+    }
+
   return (
     isHomeDetails ? (<HomeDetailsMobileFooter />) :
       (<footer className="app-footer-mobile">
@@ -24,9 +54,9 @@ export function AppFooter_mobile() {
             <ReactSVG src="/svgs/dashboard-icon.svg" />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink to="" className={({ isActive }) => "nav-btn"} onClick={(ev) => ev.preventDefault()}>
+          <NavLink to="" className={({ isActive }) => "nav-btn"} onClick={(ev) => loggedInUser ? openAuthModal(ev, true) : openAuthModal(ev, false)}>
             <ReactSVG src="/svgs/profile-icon.svg" />
-            <span>Profile</span>
+            <span>{loggedInUser ? 'Log out' : 'Log in'}</span>
           </NavLink>
         </nav>
       </footer>)

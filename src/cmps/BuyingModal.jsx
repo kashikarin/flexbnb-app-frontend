@@ -72,8 +72,9 @@ export function BuyingModal({
             </>
           )}
         </p>
-
+        
         <div className='reservation-details'>
+          
           <div className='reservation-info'>
             <div className='reservation-date-guest'>
               <h3>
@@ -92,7 +93,6 @@ export function BuyingModal({
                 }`}</span>
               </p>
             </div>
-
             <div className='reservation-price-details'>
               <h3>Price Details</h3>
               <div className='price-amount'>
@@ -117,20 +117,19 @@ export function BuyingModal({
                   </span>
                 </p>
               </div>
+              <div className="buying-modals-divider"></div>
             </div>
           </div>
-
           <div className='property-details'>
             <img src={draftOrder?.home?.imageUrl} alt='Property' />
             <div className='property-info'>
               <h4>
                 {homeType} in {homeCity}, {homeCountry}
               </h4>
-              <p>{homeSummary.split(' ').slice(0, 20).join(' ')}...</p>
+              <p>{homeSummary}</p>
             </div>
           </div>
         </div>
-
         <div className='modal-actions'>
           <button
             className='back-btn'

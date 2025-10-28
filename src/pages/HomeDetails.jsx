@@ -42,8 +42,6 @@ export function HomeDetails() {
   const isOrderConfirmationModalOpen = useSelector(
     (state) => state.draftOrderModule.isOrderConfirmationModalOpen
   )
-  const isHDImgScrolled = useSelector(state => state.scrollModule.isHDImgScrolled)
-  const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
   const draftOrder = useSelector((state) => state.draftOrderModule.draftOrder)
   const imgBreakPointRef = useRef()
   const [ showLoader ] = useState(true)
