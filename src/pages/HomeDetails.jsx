@@ -141,6 +141,7 @@ export function HomeDetails() {
     e.preventDefault()
     e.stopPropagation()
     setCurrentIdx(index)
+    
   }
 
   return (

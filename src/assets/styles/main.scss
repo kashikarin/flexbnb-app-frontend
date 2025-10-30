@@ -19,7 +19,7 @@
 @import 'pages/BookingDashboard';
 @import 'pages/AdminIndex';
 @import 'pages/TaskDetails';
-@import 'pages/LoginSignup';
+
 @import 'pages/HomeDetails';
 @import 'pages/HomeEdit';
 
@@ -37,7 +37,7 @@
 @import 'cmps/ReservationModal';
 @import 'cmps/CapacityDropdown';
 @import 'cmps/GuestFav';
-
+@import 'cmps/LoginSignup';
 @import 'cmps/ReviewEdit';
 @import 'cmps/ReviewList';
 @import 'cmps/ReviewPreview';
@@ -74,4 +74,7 @@
 @import 'cmps/HomeDetailsMobileFooter.scss';
 @import 'cmps/HomeDetailsMobileHeader.scss';
 @import 'cmps/LikeButton.scss';
+@import 'cmps/AuthModal.scss';
+@import 'cmps/LoginFields.scss';
+@import 'cmps/SignupFields.scss';
 

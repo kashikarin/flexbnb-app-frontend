@@ -46,17 +46,21 @@ export function AppFooter_mobile() {
             <ReactSVG src="/svgs/search-icon-footer.svg" />
             <span>Explore</span>
           </NavLink>
-          <NavLink to="/wishlists" className="nav-btn">
-            <ReactSVG src="/svgs/heart-icon.svg" />
-            <span>Wishlist</span>
-          </NavLink>
-          <NavLink to="/hosting/reservations" className="nav-btn">
-            <ReactSVG src="/svgs/dashboard-icon.svg" />
-            <span>Dashboard</span>
-          </NavLink>
+          {loggedInUser && (
+            <>
+              <NavLink to="/wishlists" className="nav-btn">
+                <ReactSVG src="/svgs/heart-icon.svg" />
+                <span>Wishlist</span>
+              </NavLink>
+              <NavLink to="/hosting/reservations" className="nav-btn">
+                <ReactSVG src="/svgs/dashboard-icon.svg" />
+                <span>Dashboard</span>
+              </NavLink>
+            </>
+          )}
           <NavLink to="" className={({ isActive }) => "nav-btn"} onClick={(ev) => loggedInUser ? openAuthModal(ev, true) : openAuthModal(ev, false)}>
             <ReactSVG src="/svgs/profile-icon.svg" />
-            <span>{loggedInUser ? 'Log out' : 'Log in'}</span>
+            <span>{loggedInUser ? 'Profile' : 'Log in'}</span>
           </NavLink>
         </nav>
       </footer>)
