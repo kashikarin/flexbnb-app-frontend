@@ -1,5 +1,4 @@
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-
 import { Link, useLocation } from 'react-router-dom'
 import {
   capitalizeStr,
@@ -10,9 +9,11 @@ import {
 import { useRef, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { DotsIndicator } from './DotsIndicator'
+import { useIsMobile } from '../Providers/MobileProvider'
 
 export function HomePreview({ home, isHomeLiked, onAddLike, onRemoveLike }) {
   const location = useLocation()
+  const isMobile = useIsMobile()
   const [currentIdx, setCurrentIdx] = useState(0)
   const [imgWidth, setImgWidth] = useState(0)
   const [isLiked, setIsLiked] = useState(isHomeLiked)
@@ -82,6 +83,19 @@ export function HomePreview({ home, isHomeLiked, onAddLike, onRemoveLike }) {
     const timeoutId = setTimeout(updateImageWidth, 100)
     return () => clearTimeout(timeoutId)
   }, [home.imageUrls])
+
+  useEffect(() => {
+    const slider = document.querySelector('.home-preview-image-slider-container')
+    if (!slider) return
+
+    const handleScroll = () => {
+      const index = Math.round(slider.scrollLeft / slider.clientWidth)
+      setActiveIndex(index) // ← כאן תעדכני את ה-state של הנקודות
+    }
+
+    slider.addEventListener('scroll', handleScroll)
+    return () => slider.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     setIsLiked(isHomeLiked)
@@ -160,7 +174,7 @@ export function HomePreview({ home, isHomeLiked, onAddLike, onRemoveLike }) {
               ))}
             </div>
           </div>
-          <div className="images-slider-buttons-container">
+          {!isMobile && <div className="images-slider-buttons-container">
             <div className="images-slider-btn-left">
               {currentIdx > 0 && (
                 <button
@@ -181,7 +195,7 @@ export function HomePreview({ home, isHomeLiked, onAddLike, onRemoveLike }) {
                 </button>
               )}
             </div>
-          </div>
+          </div>}
           <div className="home-preview-dots-indicator-wrapper">
             <DotsIndicator
               slidesNum={home?.imageUrls?.length}
