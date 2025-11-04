@@ -85,17 +85,17 @@ export function HomePreview({ home, isHomeLiked, onAddLike, onRemoveLike }) {
   }, [home.imageUrls])
 
   useEffect(() => {
-    const slider = document.querySelector('.home-preview-image-slider-container')
-    if (!slider) return
+    const slider = containerRef.current
+    if (!slider || !imgWidth) return
 
     const handleScroll = () => {
-      const index = Math.round(slider.scrollLeft / slider.clientWidth)
-      setActiveIndex(index) // ← כאן תעדכני את ה-state של הנקודות
+      const index = Math.round(slider.scrollLeft / imgWidth)
+      setCurrentIdx(index)
     }
 
     slider.addEventListener('scroll', handleScroll)
     return () => slider.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [containerRef, imgWidth])
 
   useEffect(() => {
     setIsLiked(isHomeLiked)
@@ -161,7 +161,9 @@ export function HomePreview({ home, isHomeLiked, onAddLike, onRemoveLike }) {
           <div className="home-preview-image-slider-wrapper">
             <div
               className="home-preview-image-slider-track"
-              style={{ '--translate-x-images': `${-currentIdx * imgWidth}px` }}
+              style={
+                isMobile ? {} :
+                  { '--translate-x-images': `${-currentIdx * imgWidth}px` }}
             >
               {home?.imageUrls?.map((imageUrl, idx) => (
                 <div
