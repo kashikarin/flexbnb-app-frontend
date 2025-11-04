@@ -31,13 +31,14 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   const isHosting = location.pathname.startsWith('/hosting')
   const isHomeEdit = location.pathname === '/hosting/edit'
   const isHomeDetails = location.pathname.startsWith('/home/')
+  const isProfile = location.pathname === '/profile'
   const isBookingDashboard = location.pathname === '/hosting/reservations/'
   const isWishLists = location.pathname === '/wishlists'
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
   const [forceExpand, setForceExpand] = useState(false)
   const isMobile = useIsMobile()
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
-      
+  
   useEffect(() => {
     if (isHomeDetails && isHDImgScrolled) {
       setHomePageNotScrolled()
@@ -101,6 +102,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
 
   const shouldCollapse = isHomePageScrolled || !isHomeIndex
 
+  if (isMobile && isProfile) return null
   return (
     <header
       className={`app-header ${
@@ -109,7 +111,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
       ${forceExpand ? 'expanded' : ''}
       ${isHomeDetails && isWideScreen ? 'narrow-layout' : 'wide-layout'}
       ${
-        (isBookingDashboard || isWishLists) && isMobile
+        (isBookingDashboard || isWishLists || isProfile) && isMobile
           ? 'searchbar-wrapper-mobile'
           : ''
       }

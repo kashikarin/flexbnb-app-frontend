@@ -59,7 +59,7 @@ export function AppFooter_mobile() {
               </NavLink>
             </>
           )}
-          <NavLink onClick={()=> {if (!loggedInUser) setAuthMode('login')}} className={({ isActive }) => "nav-btn"}>
+          <NavLink to={loggedInUser && '/profile'} onClick={()=> {if (!loggedInUser) setAuthMode('login')}} className={({ isActive }) => "nav-btn"}>
             <ReactSVG src="/svgs/profile-icon.svg" />
             <span>{loggedInUser ? 'Profile' : 'Log in'}</span>
           </NavLink>

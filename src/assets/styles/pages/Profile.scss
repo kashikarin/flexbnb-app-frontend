@@ -1,0 +1,80 @@
+.profile-mobile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding-block-start: 2rem;
+    padding-inline: clamp(1rem, 10vw, 5rem);
+    height: 100svh;
+
+    h2 {
+        font-weight: 600;
+        line-height: clamp(1.75rem, 1vh, 2.25rem);
+        font-size: 2rem;
+        letter-spacing: -0.06rem;
+    }
+
+    .profile-user-box {
+        padding-inline: 1.5rem;
+        padding-block: 2rem;
+        box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.02),0px 8px 24px 0px rgba(0,0,0,0.10);
+        flex-wrap: nowrap;
+        border-radius: 24px;
+        font-weight: 700;
+        line-height: 2.25rem;
+        font-size: 2rem;
+        width: 100%;
+        min-height: 230px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: -0.06rem;
+        -webkit-tap-highlight-color: transparent;
+
+        img {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 2px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+
+        }
+
+        .profile-user-avatar-placeholder {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+        }
+    }
+
+    .profile-option {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding-block: 1rem;
+        touch-action: manipulation;
+        cursor: pointer;
+        font-size: clamp(1rem, 1.5vh, 1.2rem);
+
+        svg {
+            margin-inline-end: 1rem;
+
+        }
+    }
+
+    
+
+}

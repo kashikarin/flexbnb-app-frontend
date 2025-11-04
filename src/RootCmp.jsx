@@ -20,6 +20,7 @@ import { draftOrderService } from './services/draft-order/draft-order.service.lo
 import { addOrder } from './store/actions/order.actions.js'
 import { closeOrderConfirmationModal } from './store/actions/draft-order.actions.js'
 import { AuthModal } from './cmps/AuthModal.jsx'
+import { Profile } from './pages/Profile.jsx'
 
 export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
   const location = useLocation()
@@ -72,6 +73,7 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
             <Route path="home/:homeId" element={<HomeDetails />} />
             <Route path="/wishlists" element={<Wishlist />} />
             <Route path="/my-travels" element={<MyTravels />} />
+            <Route path="/profile" element={<Profile />} />
             <Route
               path="admin"
               element={
@@ -85,6 +87,7 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
               <Route path="edit" element={<HomeEdit />} />
               <Route path="reservations" element={<BookingDashboard />} />
             </Route>
+
           </Routes>
         </main>
 
