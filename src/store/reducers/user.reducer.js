@@ -5,10 +5,13 @@ export const REMOVE_USER = 'REMOVE_USER'
 export const SET_WATCHED_USER = 'SET_WATCHED_USER'
 export const ADD_LIKE_HOME = 'ADD_LIKE_HOME'
 export const REMOVE_LIKE_HOME = 'REMOVE_LIKE_HOME'
+export const SET_AUTH_MODE = 'SET_AUTH_MODE'
+
 
 const initialState = {
   loggedInUser: null,
   users: [],
+  authMode: null
 }
 
 export function userReducer(state = initialState, action) {
@@ -78,6 +81,12 @@ export function userReducer(state = initialState, action) {
           : state.loggedInUser,
       }
       break
+
+      case SET_AUTH_MODE:
+        newState = {
+          ...state,
+          authMode: action.authMode
+        }  
     default:
   }
   return newState

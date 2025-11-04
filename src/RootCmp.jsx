@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux'
 import { draftOrderService } from './services/draft-order/draft-order.service.local.js'
 import { addOrder } from './store/actions/order.actions.js'
 import { closeOrderConfirmationModal } from './store/actions/draft-order.actions.js'
+import { AuthModal } from './cmps/AuthModal.jsx'
 
 export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
   const location = useLocation()
@@ -33,6 +34,7 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
   const home = useSelector((state) => state.homeModule.home)
   const draftOrder = useSelector((state) => state.draftOrderModule.draftOrder)
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 1300)
+  const authMode = useSelector(state => state.userModule.authMode)
     
     useEffect(() => {
         function handleResize() {
@@ -46,9 +48,16 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
         return () => window.removeEventListener('resize', handleResize)
       }, [])
 
-  useEffect(() => {
-    initUser()
-  }, [])
+    useEffect(() => {
+      initUser()
+    }, [])
+
+    useEffect(()=>{
+      const anyModalOpen = authMode || isOrderConfirmationModalOpen
+      if (anyModalOpen) document.body.classList.add('no-scroll')
+      else document.body.classList.remove('no-scroll')
+    }, [authMode, isOrderConfirmationModalOpen])
+
   return (
     <>
       <ScrollToTop />
@@ -95,6 +104,8 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
             closeOrderConfirmationModal={closeOrderConfirmationModal}
           />
         )}
+        {authMode && <AuthModal />}
+        {}
         {isHomeEdit && <HomeEditFooter />}
         {!isSearchExpanded && <AppFooterWrapper />}
       </div>

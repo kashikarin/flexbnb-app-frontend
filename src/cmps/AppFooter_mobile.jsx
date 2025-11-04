@@ -6,6 +6,7 @@ import { ReactSVG } from 'react-svg'
 import { HomeDetailsMobileFooter } from "./HomeDetailsMobileFooter"
 import { useSelector } from "react-redux"
 import { useState } from "react"
+import { setAuthMode } from "../store/actions/user.actions"
 
 export function AppFooter_mobile() {
   const loggedInUser = useSelector(state => state.userModule.loggedInUser)
@@ -42,23 +43,23 @@ export function AppFooter_mobile() {
     isHomeDetails ? (<HomeDetailsMobileFooter />) :
       (<footer className="app-footer-mobile">
         <nav className="bottom-nav">
-          <NavLink to="/" className="nav-btn">
+          <NavLink to="/" className="nav-btn" onClick={()=>setAuthMode(null)}>
             <ReactSVG src="/svgs/search-icon-footer.svg" />
             <span>Explore</span>
           </NavLink>
           {loggedInUser && (
             <>
-              <NavLink to="/wishlists" className="nav-btn">
+              <NavLink to="/wishlists" className="nav-btn" onClick={()=>setAuthMode(null)}>
                 <ReactSVG src="/svgs/heart-icon.svg" />
                 <span>Wishlist</span>
               </NavLink>
-              <NavLink to="/hosting/reservations" className="nav-btn">
+              <NavLink to="/hosting/reservations" className="nav-btn" onClick={()=>setAuthMode(null)}>
                 <ReactSVG src="/svgs/dashboard-icon.svg" />
                 <span>Dashboard</span>
               </NavLink>
             </>
           )}
-          <NavLink to="" className={({ isActive }) => "nav-btn"} onClick={(ev) => loggedInUser ? openAuthModal(ev, true) : openAuthModal(ev, false)}>
+          <NavLink onClick={()=> {if (!loggedInUser) setAuthMode('login')}} className={({ isActive }) => "nav-btn"}>
             <ReactSVG src="/svgs/profile-icon.svg" />
             <span>{loggedInUser ? 'Profile' : 'Log in'}</span>
           </NavLink>

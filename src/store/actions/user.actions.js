@@ -9,6 +9,7 @@ import {
   SET_WATCHED_USER,
   ADD_LIKE_HOME,
   REMOVE_LIKE_HOME,
+  SET_AUTH_MODE
 } from '../reducers/user.reducer'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -154,4 +155,11 @@ export async function initUser() {
   } catch (err) {
     console.error('Cannot init user', err)
   }
+}
+
+export function setAuthMode(authMode) {
+  store.dispatch({
+    type: SET_AUTH_MODE,
+    authMode
+  })
 }

@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { LoginFields } from "./LoginFields"
 import { SignupFields } from "./SignupFields"
 import { uploadService } from '../services/upload.service.js'
-import { login, signup } from '../store/actions/user.actions.js'
-import { useDispatch } from "react-redux"
+import { login, setAuthMode, signup } from '../store/actions/user.actions.js'
+import { useDispatch, useSelector } from "react-redux"
 import { userService } from "../services/user/user.service.remote.js"
 import { SET_LOGGEDINUSER } from "../store/reducers/user.reducer.js"
 
-export function AuthModal({ mode, onClose, onToggleMode }){
+export function AuthModal(){
     const dispatch = useDispatch()
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
@@ -19,6 +19,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
         username: '',
         imageUrl: null,
     })
+    const authMode = useSelector(state => state.userModule.authMode)
 
     useEffect(() => {
         setError('') 
@@ -37,7 +38,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
 
     function handleClose() {
         resetState()
-        onClose()   
+        setAuthMode(null)
     }
 
     function handleInputChange(ev) {
@@ -46,8 +47,8 @@ export function AuthModal({ mode, onClose, onToggleMode }){
     }
 
     function toggleMode() {
-        onToggleMode()
-        resetState()
+      setAuthMode(authMode === 'login' ? 'signup' : 'login')  
+      resetState()
     }
 
     const handleGoogleCallback = useCallback(async (response) => {
@@ -85,7 +86,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
 
         try {
             let user
-            if (mode === 'signup') {
+            if (authMode === 'signup') {
                 user = await signup({
                 email: credentials.email,
                 username: credentials.username,
@@ -173,7 +174,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
             itp_support: true,
           })
   
-          if (mode === 'login') {
+          if (authMode === 'login') {
             setTimeout(() => {
               const container = document.getElementById('google-signin-button')
               if (container) {
@@ -194,7 +195,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
       }
   
       initGoogleAuth()
-    }, [mode])
+    }, [authMode])
 
     async function handleImageSelect(event) {
         const file = event.target.files[0]
@@ -235,19 +236,19 @@ export function AuthModal({ mode, onClose, onToggleMode }){
 
     return(
         <>
-          <div className="modal-overlay" onClick={handleClose}></div>
+          <div className="auth-modal-cover" onClick={handleClose}></div>
           <div className="auth-modal">
             <div className="auth-modal-content">
               <button className="close-btn" onClick={handleClose}>
                 ×
               </button>
               <div className="auth-content">
-                <h2>{mode === 'signup' ? 'Sign Up' : 'Log In'}</h2>
+                <h2>{authMode === 'signup' ? 'Sign Up' : 'Log In'}</h2>
 
                 {error && <div className="error-message">{error}</div>}
 
                 <div className="auth-form">
-                  {mode === 'login' ? 
+                  {authMode === 'login' ? 
                     <LoginFields 
                         credentials={credentials} 
                         isLoading={isLoading}
@@ -267,14 +268,11 @@ export function AuthModal({ mode, onClose, onToggleMode }){
                         onClick={handleAuth}
                         disabled={isLoading || isUploadingImage}
                     >
-                        {isLoading ? 'Loading...' : mode === 'signup' ? 'Sign Up' : 'Log In'}
+                        {isLoading ? 'Loading...' : authMode === 'signup' ? 'Sign Up' : 'Log In'}
                     </button>
-                    {mode === 'login' && (
+                    {authMode === 'login' && (
                         <>
-                            <div className="auth-divider">
-                                <span>or</span>
-                            </div>
-
+                            <span className='email-google-login-divider'>or</span>
                             <div
                                 id="google-signin-button"
                                 style={{ marginBottom: '20px' }}
@@ -283,7 +281,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
                     )}
                     <div className="auth-toggle">
                         <span>
-                            {mode === 'signup'
+                            {authMode === 'signup'
                                 ? 'Already have an account? '
                                 : "Don't have an account? "}
                             <button
@@ -291,7 +289,7 @@ export function AuthModal({ mode, onClose, onToggleMode }){
                                 onClick={toggleMode}
                                 disabled={isLoading}
                             >
-                                {mode === 'signup' ? 'Log In' : 'Sign Up'}
+                                {authMode === 'signup' ? 'Log In' : 'Sign Up'}
                             </button>
                         </span>
                     </div>

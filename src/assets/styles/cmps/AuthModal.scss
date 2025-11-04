@@ -1,4 +1,4 @@
-.modal-overlay {
+.auth-modal-cover {
   position: fixed;
   top: 0;
   left: 0;
@@ -238,6 +238,13 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 10px;
+  margin-inline: 0px;
+}
+
+.email-google-login-divider {
+  position: relative;
+  text-align: center;
+  font-size: 14px;
 }
 
 .auth-submit-btn:hover:not(:disabled) {
@@ -347,29 +354,29 @@
     }
 
 
-    .auth-divider {
+    .email-google-login-divider {
         position: relative;
         text-align: center;
-        margin: 20px 0;
-    }
-
-    .auth-divider::before {
-    content: '';
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background-color: #ddd;
-    }
-
-    .auth-divider span {
-        background-color: white;
-        padding: 0 15px;
-        color: #666;
         font-size: 14px;
-        text-transform: lowercase;
     }
+
+    // .auth-divider::before {
+    // content: '';
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 0;
+    //     right: 0;
+    //     height: 1px;
+    //     background-color: #ddd;
+    // }
+
+    // .auth-divider span {
+    //     background-color: white;
+    //     padding: 0 15px;
+    //     color: #666;
+    //     font-size: 14px;
+    //     text-transform: lowercase;
+    // }
 
     .google-auth-btn {
         width: 100%;
@@ -403,4 +410,67 @@
         width: 18px;
         height: 18px;
     }
+}
+
+@media (max-width: $narrow-breakpoint) {
+    .auth-modal-cover {
+      display: none;
+      // position: fixed;
+      // inset: 0;
+      // background-color: #fff;
+      // z-index: 100;
+      // height: 100svh;
+      // overflow: hidden;
+      // overscroll-behavior: none;
+    }
+
+    .auth-modal {
+      position: fixed;
+      inset: 0;
+      transform: none;
+      background-color: #fff;
+      height: 100svh;
+      max-width: none;
+      max-height: none;
+      width: 100%;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      z-index: 101;
+      scrollbar-width: none;
+      
+        .auth-modal-content {
+          flex: 0 0 auto;
+          box-shadow: none;
+          animation: none;
+          direction: ltr;
+          text-align: left;
+          border-radius: 10px;
+          border: 1px solid $divider-color;
+
+        .close-btn {
+          display: none;
+        }
+
+        .auth-content h2 {
+          text-align: center;
+          margin-bottom: 25px;
+          color: #333;
+          font-size: 24px;
+        }
+      }
+    }
+
+    .auth-modal::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+    
+    
 }

@@ -39,6 +39,13 @@ body {
   font-size: rem(18px);
 }
 
+body.no-scroll {
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  width: 100%;
+}
+
 h1,
 h2,
 h3,

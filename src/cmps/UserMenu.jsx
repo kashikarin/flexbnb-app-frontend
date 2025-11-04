@@ -4,16 +4,15 @@ import { ReactSVG } from 'react-svg'
 import { Link } from 'react-router-dom'
 import { userService } from '../services/user/index'
 import { SET_LOGGEDINUSER } from '../store/reducers/user.reducer'
-import { logout } from '../store/actions/user.actions.js'
+import { logout, setAuthMode } from '../store/actions/user.actions.js'
 import { AuthModal } from './AuthModal.jsx'
 
 export function UserMenu() {
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
-  const [authMode, setAuthMode] = useState(null)
   const dispatch = useDispatch()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef(null)
-
+  const authMode = useSelector(state => state.userModule.authMode)
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -47,22 +46,14 @@ export function UserMenu() {
       initUser()
     }
   }, [dispatch, loggedInUser])
-  
-  function toggleAuthMode() {
-    setAuthMode((prev) => (prev === 'login' ? 'signup' : 'login'))
-  }
 
   function toggleDropdown() {
     setIsDropdownOpen(!isDropdownOpen)
   }
 
-  function openAuthModal(mode = 'login') {
+  function onOpenAuthModal(mode = 'login') {
     setAuthMode(mode)
     setIsDropdownOpen(false)
-  }
-
-   function closeAuthModal() {
-    setAuthMode(null)
   }
 
   async function handleLogout() {
@@ -109,13 +100,13 @@ export function UserMenu() {
               <div className="user-menu-content">
                 <button
                   className="menu-item"
-                  onClick={() => openAuthModal('login')}
+                  onClick={() => onOpenAuthModal('login')}
                 >
                   Log In
                 </button>
                 <button
                   className="menu-item"
-                  onClick={() => openAuthModal('signup')}
+                  onClick={() => onOpenAuthModal('signup')}
                 >
                   Sign Up
                 </button>
@@ -124,13 +115,6 @@ export function UserMenu() {
           </div>
         )}
       </div>
-
-      {authMode && <AuthModal 
-          mode={authMode} 
-          onClose={closeAuthModal} 
-          onToggleMode={toggleAuthMode} 
-          />
-      }
     </>
   )
 }
