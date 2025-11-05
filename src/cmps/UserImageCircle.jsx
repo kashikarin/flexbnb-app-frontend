@@ -4,7 +4,7 @@ export function UserImageCircle({ imageUrl = null, name, father }){
             <img
                 src={imageUrl}
                 alt={name}
-                className={father === 'dashboard' ? 'guest-image' : ''}
+                className={father === 'dashboard' ? 'guest-or-host-image' : ''}
             />
         ) : (
             <div className={`${father}-user-avatar-placeholder`}>

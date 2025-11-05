@@ -14,7 +14,6 @@ export async function updateOrder(orderToUpdate) {
     const updatedOrder = await orderService.save(orderToUpdate)
     console.log("🚀 ~ updatedOrder:", updatedOrder)
     store.dispatch(getCmdUpdateOrder(updatedOrder))
-    await loadOrders()
     return updatedOrder
   } catch (err) {
     console.error('Cannot update order status', err)
@@ -22,9 +21,10 @@ export async function updateOrder(orderToUpdate) {
   }
 }
 
-export async function loadOrders() {
+export async function loadOrders(filterOrdersBy) {
+  console.log("🚀 ~ filterOrdersBy:", filterOrdersBy)
   try {
-    const orders = await orderService.query()
+    const orders = await orderService.query(filterOrdersBy)   
     store.dispatch(getCmdSetOrders(orders))
   } catch (err) {
     console.error('Cannot load orders', err)
@@ -73,8 +73,8 @@ export async function removeOrder(orderId) {
   }
 }
 
-export function setFilterOrdersBy(filterBy) {
-  store.dispatch(getCmdSetFilterOrdersBy(filterBy))
+export function setFilterOrdersBy(filterOrdersBy) {
+  store.dispatch(getCmdSetFilterOrdersBy(filterOrdersBy))
 }
 
 // Command Creators:

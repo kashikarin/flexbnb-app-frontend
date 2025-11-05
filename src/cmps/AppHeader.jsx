@@ -33,6 +33,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   const isHomeEdit = location.pathname === '/hosting/edit'
   const isHomeDetails = location.pathname.startsWith('/home/')
   const isProfile = location.pathname === '/profile'
+  const isPastTrips = location.pathname === '/pasttrips'
   const isBookingDashboard = location.pathname === '/hosting/reservations/'
   const isWishLists = location.pathname === '/wishlists'
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
@@ -103,7 +104,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
 
   const shouldCollapse = isHomePageScrolled || !isHomeIndex
 
-  if (isMobile && isProfile) return null
+  if (isMobile && isProfile && isPastTrips) return null
   return (
     <header
       className={`app-header ${
@@ -129,7 +130,9 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
               shouldCollapse ? 'scrolled' : 'expanded'
             }
             ${isHomeDetails && isWideScreen ? 'narrow-layout' : 'wide-layout'}`}
-            style={!(isHomeDetails && isMobile) ? {paddingBlockEnd: '2rem'} : {}}
+            style={{...(!(isHomeDetails && isMobile) ? {paddingBlockEnd: '2rem'} : {}),
+            ...(isHosting ? {borderBottom: 'none'} : {})
+          }}
           >
             {isHomeDetails && isMobile && <HomeDetailsMobileHeader />}
             {/* hosting, excluding edit, routes: */}
@@ -221,10 +224,10 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                           <div className="user-info">
                             <Link to={`user/${loggedInUser._id}`}>
                               <UserImageCircle 
-                              imageUrl={loggedInUser.imageUrl} 
-                              name={loggedInUser.fullname || loggedInUser.username} 
-                              father='header'
-                            />
+                                imageUrl={loggedInUser.imageUrl} 
+                                name={loggedInUser.fullname || loggedInUser.username} 
+                                father='header'
+                              />
                             </Link>
                           </div>
                         </>

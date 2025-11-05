@@ -12,8 +12,9 @@ export const orderService = {
   getById,
 }
 
-async function query() {
-  return httpService.get(`orders`)
+async function query(filterOrdersBy = {}) {
+console.log('client → filterOrdersBy:', filterOrdersBy)  
+  return httpService.get(`orders`, filterOrdersBy)
 }
 
 async function save(orderToSave) {

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { userService } from '../services/user/index'
 import { SET_LOGGEDINUSER } from '../store/reducers/user.reducer'
 import { logout, setAuthMode } from '../store/actions/user.actions.js'
-import { AuthModal } from './AuthModal.jsx'
 
 export function UserMenu() {
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
@@ -89,6 +88,13 @@ export function UserMenu() {
                   Profile
                 </Link>
                 {/* <div className="menu-divider"></div> */}
+                <Link
+                  to="/pasttrips"
+                  className="menu-item"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Past trips
+                </Link>
                 <Link
                   to="/wishlists"
                   className="menu-item"

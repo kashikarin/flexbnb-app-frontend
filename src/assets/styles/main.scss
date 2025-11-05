@@ -22,6 +22,7 @@
 
 @import 'pages/HomeDetails';
 @import 'pages/HomeEdit';
+@import 'pages/PastTrips';
 @import 'pages/Profile';
 
 // Components
@@ -78,4 +79,6 @@
 @import 'cmps/AuthModal.scss';
 @import 'cmps/LoginFields.scss';
 @import 'cmps/SignupFields.scss';
+@import 'cmps/PastTripsList.scss';
+
 

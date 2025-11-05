@@ -227,6 +227,14 @@ export function getNightsCount(startStr, endStr) {
   return Math.round(diffInMs / millisecondsPerDay)
 }
 
+  export function calculateNightsForTable(checkIn, checkOut) {
+    const start = new Date(checkIn)
+    const end = new Date(checkOut)
+    const diffTime = Math.abs(end - start)
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    return diffDays
+  }
+
 export function formatDate(value) {
   if (!value) return ""
   const date = value instanceof Date ? value : new Date(value)
@@ -235,6 +243,14 @@ export function formatDate(value) {
     year: "numeric",
     month: "short",
     day: "numeric",
+  })
+}
+
+export function formatOrderDateToTable(dateString) {
+  return new Date(dateString).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
   })
 }
 
@@ -249,6 +265,23 @@ export function normalizeDateToUTC(date){
   newDate.setHours(0, 0, 0, 0)
   newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset())
   return newDate
+}
+
+export function getStatusText(status) {
+  const statusMap = {
+    approved: 'Approved',
+    pending: 'Pending',
+    rejected: 'Rejected',
+  }
+  return statusMap[status] || status
+}
+
+export function getGuestCount(guests) {
+  if (!guests) return 0
+  let count = parseInt(guests.adults) || 0
+  count += parseInt(guests.children) || 0
+  // count += parseInt(guests.infants) || 0
+  return count
 }
 
 export async function getCityFromCoordinates(lat, lng) {

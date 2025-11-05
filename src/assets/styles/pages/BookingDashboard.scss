@@ -10,6 +10,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
+  padding-block-end: 50px;
 }
 
 .header {
@@ -196,8 +197,8 @@
 }
 
 .property-image {
-  width: 60px;
-  height: 45px;
+  width: 80px;
+  height: 65px;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
@@ -219,19 +220,19 @@
   color: $gray9;
 }
 
-.guest-cell {
+.guest-or-host-cell {
   min-width: 140px;
 }
 
-.guest-info {
+.guest-or-host-info {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.guest-image {
-  width: 50px;
-  height: 50px;
+.guest-or-host-image {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #f0f0f0;
@@ -261,13 +262,13 @@
   text-decoration: none;
 }
 
-.guest-details {
+.guest-or-host-details {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.guest-name {
+.guest-or-host-name {
   font-weight: 600;
   color: $primary-font-black;
   font-size: $font-size-md;
@@ -293,6 +294,7 @@
 .nights-count {
   font-size: $font-size-xxs;
   color: $secondary-font-gray;
+  line-height: 1rem;
 }
 
 .guests-cell {
@@ -867,8 +869,8 @@
   }
 
   .property-image {
-    width: 50px;
-    height: 38px;
+    width: 60px;
+    height: 45px;
   }
 }
 
@@ -975,6 +977,7 @@
 @media (max-width: $mobile-breakpoint) {
   .container {
     padding: 10px;
+    padding-block-end: 80px;
   }
 
   .header h1 {
@@ -1040,8 +1043,8 @@
   }
 
   .property-image {
-    width: 40px;
-    height: 30px;
+    width: 50px;
+    height: 40px;
   }
 
   .guest-image {
@@ -1085,6 +1088,7 @@
 @media (max-width: 360px) {
   .container {
     padding: 8px;
+    padding-block-end: 80px;
   }
 
   .booking-card {

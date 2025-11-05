@@ -10,7 +10,6 @@ import { HomeEdit } from './pages/HomeEdit.jsx'
 import { useEffect, useState } from 'react'
 import { HomeEditFooter } from './cmps/home-edit/HomeEditFooter.jsx'
 import { Wishlist } from './cmps/Wishlist.jsx'
-import MyTravels from './cmps/MyTravels.jsx'
 import { BookingDashboard } from './pages/BookingDashboard.jsx'
 import { initUser } from './store/actions/user.actions.js'
 import { BookingPlaceholder } from './cmps/BookingPlaceholder.jsx'
@@ -21,6 +20,7 @@ import { addOrder } from './store/actions/order.actions.js'
 import { closeOrderConfirmationModal } from './store/actions/draft-order.actions.js'
 import { AuthModal } from './cmps/AuthModal.jsx'
 import { Profile } from './pages/Profile.jsx'
+import { PastTrips } from './pages/PastTrips.jsx'
 
 export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
   const location = useLocation()
@@ -72,7 +72,7 @@ export function RootCmp({ mainRef, isSearchExpanded, setIsSearchExpanded }) {
             />
             <Route path="home/:homeId" element={<HomeDetails />} />
             <Route path="/wishlists" element={<Wishlist />} />
-            <Route path="/my-travels" element={<MyTravels />} />
+            <Route path="/pasttrips" element={<PastTrips />} />
             <Route path="/profile" element={<Profile />} />
             <Route
               path="admin"
