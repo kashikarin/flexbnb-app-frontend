@@ -5,21 +5,21 @@ import { getExistingProperties } from '../services/util.service'
 
 export function useOrderFilterSearchParams() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [filterBy, setFilterBy] = useState(getFilterFromSearchParams(searchParams))
+  const [filterOrdersBy, setFilterOrdersBy] = useState(getFilterFromSearchParams(searchParams))
 
   useEffect(() => {
     const parsed = getFilterFromSearchParams(searchParams)
-    setFilterBy(parsed)
+    setFilterOrdersBy(parsed)
 }, [searchParams])
 
   useEffect(() => {
-    setFilterBy(getFilterFromSearchParams(searchParams))
+    setFilterOrdersBy(getFilterFromSearchParams(searchParams))
   }, [searchParams])
 
-  function setExistOrderFilterSearchParams(newFilterBy) {
-    setSearchParams(getExistingProperties(newFilterBy))
-    setFilterBy(newFilterBy)
+  function setExistOrderFilterSearchParams(newFilterOrdersBy) {
+    setSearchParams(getExistingProperties(newFilterOrdersBy))
+    setFilterOrdersBy(newFilterOrdersBy)
   }
 
-  return { filterBy, setExistOrderFilterSearchParams }
+  return { filterOrdersBy, setExistOrderFilterSearchParams }
 }

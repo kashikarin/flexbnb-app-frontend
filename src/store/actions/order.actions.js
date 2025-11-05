@@ -73,8 +73,8 @@ export async function removeOrder(orderId) {
   }
 }
 
-export function setFilterBy(filterBy) {
-  store.dispatch(getCmdSetFilterOrderBy(filterBy))
+export function setFilterOrdersBy(filterBy) {
+  store.dispatch(getCmdSetFilterOrdersBy(filterBy))
 }
 
 // Command Creators:
@@ -109,7 +109,7 @@ function getCmdUpdateOrder(order) {
   }
 }
 
-function getCmdSetFilterOrderBy(filterOrdersBy) {
+function getCmdSetFilterOrdersBy(filterOrdersBy) {
   return {
     type: SET_FILTERORDERSBY,
     filterOrdersBy,

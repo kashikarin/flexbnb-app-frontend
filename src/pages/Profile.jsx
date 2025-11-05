@@ -4,6 +4,7 @@ import { ProfileMobile } from "../cmps/ProfileMobile"
 
 export function Profile(){
     const isMobile = useIsMobile()
+    console.log("🚀 ~ isMobile:", isMobile)
 
     return(
         <div>

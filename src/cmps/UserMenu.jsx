@@ -82,6 +82,14 @@ export function UserMenu() {
                 </div>
                 <div className="menu-divider"></div>
                 <Link
+                  to="/profile"
+                  className="menu-item"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Profile
+                </Link>
+                {/* <div className="menu-divider"></div> */}
+                <Link
                   to="/wishlists"
                   className="menu-item"
                   onClick={() => setIsDropdownOpen(false)}
@@ -93,7 +101,7 @@ export function UserMenu() {
                   className="menu-item logout-item"
                   onClick={handleLogout}
                 >
-                  Log Out
+                  Log out
                 </button>
               </div>
             ) : (

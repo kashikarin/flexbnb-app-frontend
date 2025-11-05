@@ -17,6 +17,7 @@ import { UserMenu } from './UserMenu'
 import { useIsMobile } from '../Providers/MobileProvider'
 import { SearchBar_mobile } from './SearchBar_mobile'
 import { HomeDetailsMobileHeader } from './HomeDetailsMobileHeader'
+import { UserImageCircle } from './UserImageCircle'
 
 export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
   const dispatch = useDispatch()
@@ -164,26 +165,11 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                         </Link>)}
                         <div className="user-info">
                           <Link to={`user/${loggedInUser._id}`}>
-                            {loggedInUser.imageUrl ? (
-                              <img
-                                src={loggedInUser.imageUrl}
-                                alt={
-                                  loggedInUser.fullname || loggedInUser.username
-                                }
-                              />
-                            ) : (
-                              <div className="user-avatar-placeholder">
-                                <span>
-                                  {(
-                                    loggedInUser.fullname ||
-                                    loggedInUser.username ||
-                                    'U'
-                                  )
-                                    .charAt(0)
-                                    .toUpperCase()}
-                                </span>
-                              </div>
-                            )}
+                            <UserImageCircle 
+                              imageUrl={loggedInUser.imageUrl} 
+                              name={loggedInUser.fullname || loggedInUser.username} 
+                              father='header'
+                            />
                           </Link>
                         </div>
                       </>
@@ -234,27 +220,11 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                           </Link>)}
                           <div className="user-info">
                             <Link to={`user/${loggedInUser._id}`}>
-                              {loggedInUser.imageUrl ? (
-                                <img
-                                  src={loggedInUser.imageUrl}
-                                  alt={
-                                    loggedInUser.fullname ||
-                                    loggedInUser.username
-                                  }
-                                />
-                              ) : (
-                                <div className="user-avatar-placeholder">
-                                  <span>
-                                    {(
-                                      loggedInUser.fullname ||
-                                      loggedInUser.username ||
-                                      'U'
-                                    )
-                                      .charAt(0)
-                                      .toUpperCase()}
-                                  </span>
-                                </div>
-                              )}
+                              <UserImageCircle 
+                              imageUrl={loggedInUser.imageUrl} 
+                              name={loggedInUser.fullname || loggedInUser.username} 
+                              father='header'
+                            />
                             </Link>
                           </div>
                         </>

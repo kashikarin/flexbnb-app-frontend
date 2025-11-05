@@ -3,6 +3,7 @@ import { ReactSVG } from "react-svg"
 import { logout } from "../store/actions/user.actions"
 import { useNavigate } from "react-router"
 import { useEffect } from "react"
+import { UserImageCircle } from "./UserImageCircle"
 
 export function ProfileMobile(){
     const loggedInUser = useSelector(state => state.userModule.loggedInUser)
@@ -14,30 +15,15 @@ export function ProfileMobile(){
 
     if (!loggedInUser) return null
     return(
-        <section className="profile-mobile-container narrow-layout">
-            <h2>Profile</h2>
+        <section className="profile-mobile-container">
+            <span>Profile</span>
             <article className="profile-user-box">
                 {/* user-image */}
-                {loggedInUser.imageUrl ? (
-                    <img
-                    src={loggedInUser.imageUrl}
-                    alt={
-                        loggedInUser.fullname || loggedInUser.username
-                    }
-                    />
-                ) : (
-                    <div className="profile-user-avatar-placeholder">
-                        <span>
-                            {(
-                            loggedInUser.fullname ||
-                            loggedInUser.username ||
-                            'U'
-                            )
-                            .charAt(0)
-                            .toUpperCase()}
-                        </span>
-                    </div>
-                )}
+                <UserImageCircle 
+                    imageUrl={loggedInUser.imageUrl} 
+                    name={loggedInUser.fullname || loggedInUser.username} 
+                    father='profile-mobile'
+                />
                 <span>{loggedInUser.fullname || loggedInUser.username}</span>
             </article>
             <article className="profile-option">

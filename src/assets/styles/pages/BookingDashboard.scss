@@ -238,6 +238,29 @@
   flex-shrink: 0;
 }
 
+.dashboard-user-avatar-placeholder {
+  background-color: #000;
+  color: #fff;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-sizing: border-box !important;
+}
+
+.dashboard-user-avatar-placeholder:hover {
+  text-decoration: none;
+}
+
 .guest-details {
   display: flex;
   flex-direction: column;

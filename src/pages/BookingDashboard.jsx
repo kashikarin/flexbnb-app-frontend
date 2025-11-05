@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { loadOrders, updateOrder } from '../store/actions/order.actions'
 import AccessDenied from '../cmps/AccessDenied'
 import { useOrderFilterSearchParams } from '../customHooks/useOrderFilterSearchParams'
+import { UserImageCircle } from '../cmps/UserImageCircle'
 
 export const BookingDashboard = () => {
   const loggedInUser = useSelector((state) => state.userModule.loggedInUser)
@@ -279,27 +280,11 @@ const ordersToShow = filteredBookings || []
                             </td>
                             <td className="guest-cell">
                               <div className="guest-info">
-                                {order.purchaser?.imageUrl ? (
-                                  <img
-                                    src={order.purchaser?.imageUrl}
-                                    alt={
-                                      order.purchaser?.fullname ||
-                                      order.host?.fullname ||
-                                      'Guest'
-                                    }
-                                    className="guest-image"
-                                  />
-                                ) : (
-                                  <div className="user-avatar-placeholder">
-                                    {(
-                                      loggedInUser.fullname ||
-                                      loggedInUser.username ||
-                                      'U'
-                                    )
-                                      .charAt(0)
-                                      .toUpperCase()}
-                                  </div>
-                                )}
+                                <UserImageCircle 
+                                  imageUrl={order.purchaser?.imageUrl}
+                                  name={order.purchaser?.fullname || order.host?.fullname}
+                                  father='dashboard'
+                                />
                                 <div className="guest-details">
                                   <div className="guest-name">
                                     {order.purchaser?.fullname ||
@@ -462,7 +447,12 @@ const ordersToShow = filteredBookings || []
                         {/* Guest Info */}
                         <div className="guest-section">
                           <div className="guest-info">
-                            {order.purchaser?.imageUrl ? (
+                            <UserImageCircle 
+                              imageUrl={order.purchaser?.imageUrl}
+                              name={order.purchaser?.fullname || order.host?.fullname}
+                              father='dashboard'
+                            />
+                            {/* {order.purchaser?.imageUrl ? (
                               <img
                                 src={order.purchaser?.imageUrl}
                                 alt={
@@ -482,7 +472,7 @@ const ordersToShow = filteredBookings || []
                                   .charAt(0)
                                   .toUpperCase()}
                               </div>
-                            )}
+                            )} */}
                             <div className="guest-details">
                               <div className="guest-name">
                                 {order.purchaser?.fullname ||

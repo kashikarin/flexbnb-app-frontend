@@ -20,7 +20,7 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.user-avatar-placeholder {
+.header-user-avatar-placeholder {
   background-color: #000;
   color: #fff;
   width: 40px !important;
@@ -39,7 +39,7 @@
   box-sizing: border-box !important;
 }
 
-.user-avatar-placeholder:hover {
+.header-user-avatar-placeholder:hover {
   text-decoration: none;
 }
 
@@ -98,6 +98,7 @@
   text-align: left;
   transition: background-color 0.2s ease;
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .menu-item:hover {
@@ -109,12 +110,11 @@
 }
 
 .logout-item {
-  font-weight: 500;
+  margin: 0;
 }
 
 .logout-item:hover {
-  background-color: #ffeaea;
-  color: #d93025;
+  background-color: #f7f7f7;
 }
 
 .menu-divider {

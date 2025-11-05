@@ -247,9 +247,11 @@
         padding: 2px;
         width: 40px;
         height: 40px;
+
         &:hover {
           text-decoration: none;
         }
+        
         img {
           object-fit: cover;
           border-radius: 50%;
