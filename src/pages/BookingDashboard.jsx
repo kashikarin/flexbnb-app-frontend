@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { loadOrders, setFilterOrdersBy, updateOrder } from '../store/actions/order.actions'
 import AccessDenied from '../cmps/AccessDenied'
 import { useOrderFilterSearchParams } from '../customHooks/useOrderFilterSearchParams'
-import { UserImageCircle } from '../cmps/UserImageCircle'
 import { OrdersTableDesktop } from '../cmps/OrdersTableDesktop'
 import { OrdersTableMobile } from '../cmps/OrdersTableMobile'
 import { useIsMobile } from '../Providers/MobileProvider'
@@ -28,39 +27,6 @@ export function BookingDashboard() {
   }, [loggedInUser])
 
   // Helper functions
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    })
-  }
-
-  const calculateNights = (checkIn, checkOut) => {
-    const start = new Date(checkIn)
-    const end = new Date(checkOut)
-    const diffTime = Math.abs(end - start)
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
-  }
-
-  const getStatusText = (status) => {
-    const statusMap = {
-      approved: 'Approved',
-      pending: 'Pending',
-      rejected: 'Rejected',
-    }
-    return statusMap[status] || status
-  }
-
-  const getGuestCount = (guests) => {
-    if (!guests) return 0
-    let count = parseInt(guests.adults) || 0
-    count += parseInt(guests.children) || 0
-    // count += parseInt(guests.infants) || 0
-    return count
-  }
 
   const handleBookingAction = (bookingId, action) => {
     setSelectedBooking(bookingId)

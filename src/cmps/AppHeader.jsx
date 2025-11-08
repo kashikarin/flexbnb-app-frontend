@@ -260,7 +260,7 @@ export function AppHeader({ scrollContainerRef, setIsSearchExpanded }) {
                     shouldCollapse ? 'scrolled' : 'expanded'
                   }`}
                 >
-                  {!isWishLists ? (
+                  {(isHomeIndex || isHomeDetails)? (
                     !isMobile ? (
                       <div
                         className={`searchbar-wrapper ${

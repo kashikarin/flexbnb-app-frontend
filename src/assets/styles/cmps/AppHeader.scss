@@ -15,6 +15,7 @@
   overflow: visible;
   background: linear-gradient(180deg, #ffffff 39.9%, #f8f8f8 100%);
   transition: all 0.3s ease, grid-template-rows;
+  isolation: isolate; 
   //background: #ffffff;
 
   // &.expanded {

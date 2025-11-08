@@ -453,6 +453,10 @@
   height: clamp(220px, 60vw, 400px);
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; 
+  &::-webkit-scrollbar {
+    display: none; 
+  }
 
   .home-details-img-slider-wrapper {
     width: 100%;
