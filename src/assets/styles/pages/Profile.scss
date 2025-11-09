@@ -15,68 +15,122 @@
         margin-block-end: 1rem;
     }
 
-    .profile-user-box {
-        padding-inline: 1.5rem;
-        padding-block: 2rem;
-        box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.02),0px 8px 24px 0px rgba(0,0,0,0.10);
-        flex-wrap: nowrap;
-        border-radius: 24px;
-        font-weight: 700;
-        line-height: 2.25rem;
-        font-size: 2rem;
-        width: 100%;
-        min-height: 230px;
+    .profile-mobile-bix-boxes-container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        letter-spacing: -0.06rem;
-        -webkit-tap-highlight-color: transparent;
-
-        img {
-            display: flex;
+        gap: 1rem;
+        width: 100%;
+        
+        .profile-mobile-big-box {
+            padding-inline: 1.5rem;
+            padding-block: clamp(1rem, 1vh, 2rem);
+            box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.02),0px 8px 24px 0px rgba(0,0,0,0.10);
             flex-wrap: nowrap;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 2px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-
-        }
-
-        .profile-mobile-user-avatar-placeholder {
+            border-radius: 24px;
+            font-weight: 700;
+            line-height: clamp(1.75rem, 2vh, 2.25rem);
+            font-size: clamp(1.5rem, 2vh, 2rem);
+            width: 100%;
+            min-height: 180px;
             display: flex;
-            flex-wrap: nowrap;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 2px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            background-color: black;
-            color: white;
-            border-radius: 50%;
+            gap: 0.5rem;
+            letter-spacing: -0.06rem;
+            -webkit-tap-highlight-color: transparent;
+
+            img {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 2px;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .profile-mobile-user-avatar-placeholder {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: center;
+                padding: 2px;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                background-color: black;
+                color: white;
+                border-radius: 50%;
+            }
         }
     }
 
-    .profile-option {
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-        padding-block: 1rem;
-        touch-action: manipulation;
-        cursor: pointer;
-        font-size: clamp(1rem, 1.5vh, 1.2rem);
+    .profile-mobile-links-list-container {
+        margin-block-end: 60px;
 
-        svg {
-            margin-inline-end: 1rem;
+        .profile-mobile-link {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            padding-block: 1rem;
+            touch-action: manipulation;
+            cursor: pointer;
+            font-size: clamp(1rem, 1.5vh, 1.2rem);
 
+            svg {
+                margin-inline-end: 1rem;
+
+            }
         }
     }
 }
 
+.past-trips-modal {
+    position: fixed;
+    inset: 0;
+    transform: none;
+    background-color: #fff;
+    height: 100svh;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    z-index: 101;
+    scrollbar-width: none;
+
+    & > h2 {
+        margin-block-start: 1.5rem;
+    }
+    & > button {
+            padding: 12px;
+            width: max-content;
+            height: max-content;
+            border-radius: 50%;
+            background-color: $secondary-hover-gray;
+            margin: 0;
+        }
+        div {
+           svg {
+                color: $primary-black-inverted;
+                width: 16px;
+                height: 16px;
+                stroke: currentcolor;
+                stroke-width: 4;
+                display: block;
+                fill: none;
+            } 
+        }
+}
 .profile-desktop-container {
     display: flex;
     flex-direction: row;

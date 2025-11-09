@@ -14,7 +14,6 @@ export function UserMenu() {
   const dropdownRef = useRef(null)
   const buttonRef = useRef(null)
   const [coords, setCoords] = useState({ top: 0, right: 0 })
-  const authMode = useSelector(state => state.userModule.authMode)
 
   useEffect(() => {
     let portalRoot = document.getElementById('portal-root')
